@@ -32,17 +32,7 @@ public class Moving : MonoBehaviour
             FillArray();
             stopRand = true;
         }
-        MoveMen();
-        //transform.LookAt(target);
-        //if (forward)
-        //    transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
-        //if (transform.position == target)
-        //{
-        //    if (target == point1.position)
-        //        target = point2.position;
-        //    else if (target == point2.position)
-        //        target = point1.position;
-        //}
+        MoveMen();       
     }
     private void MoveMen()
     {
@@ -53,25 +43,22 @@ public class Moving : MonoBehaviour
 
         if (transform.position == target)
         {
-            if (target == array[0])
-                target = array[1];
-            else if (target == array[1])
-                target = array[0];
+            if (nnn > 0)
+            {
+                nnn--;
+                target = array[nnn];
+            }            
         }
     }
     private void FillArray()
     {
         nnn = int.Parse(n.text);
         array = new Vector3[nnn];
-        array[0] = new Vector3(4f, 0f, 0f);
-        //array[1] = new Vector3(2f, 2f, 2f);
-
 
         for (int i = 0; i < nnn; ++i)
         {
             random = UnityEngine.Random.Range(0, 5);
-            array[i] = new Vector3(random, random, random);
-            Debug.Log(random);
+            array[i] = new Vector3(random, random + 1, random - 1);
         }
     }
 
