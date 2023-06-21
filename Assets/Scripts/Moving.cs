@@ -16,22 +16,22 @@ public class Moving : MonoBehaviour
     public Transform point1;
     public Transform point2;
     private Vector3 target;
-    public float speed;
+    public float speed = 40;
     private int nnn = 0;
     private int random;
     void Start()
     {
-        target.Set(0, 4, 0);
+        target.Set(4, 0, 0);
         // target = point1.position;
     }
 
        void Update()
     {
-        //if (n != null && stopRand == false)
-        //{
-        //    FillArray();
-        //    stopRand = true;
-        //}
+        if (n != null && stopRand == false)
+        {
+            FillArray();
+            stopRand = true;
+        }
         MoveMen();
         //transform.LookAt(target);
         //if (forward)
@@ -50,29 +50,29 @@ public class Moving : MonoBehaviour
         if (forward)
           
                 transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
-           
-        //if (transform.position == target)
-        //{
-        //    if (target == array[0])
-        //        target = array[1];
-        //    else if (target == array[1])
-        //        target = array[0];
-        //}
+
+        if (transform.position == target)
+        {
+            if (target == array[0])
+                target = array[1];
+            else if (target == array[1])
+                target = array[0];
+        }
     }
     private void FillArray()
     {
         nnn = int.Parse(n.text);
         array = new Vector3[nnn];
-        //array[0] = new Vector3(1f, 0f, 1f);
+        array[0] = new Vector3(4f, 0f, 0f);
         //array[1] = new Vector3(2f, 2f, 2f);
 
 
-        //for (int i = 0; i < nnn; ++i)
-        //{
-        //    random = UnityEngine.Random.Range(0, 5);
-        //    array[i] = new Vector3(random, random, random);
-        //    Debug.Log(random);
-        //}
+        for (int i = 0; i < nnn; ++i)
+        {
+            random = UnityEngine.Random.Range(0, 5);
+            array[i] = new Vector3(random, random, random);
+            Debug.Log(random);
+        }
     }
 
 }
