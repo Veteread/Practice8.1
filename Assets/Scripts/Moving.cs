@@ -16,13 +16,13 @@ public class Moving : MonoBehaviour
     public Transform point1;
     public Transform point2;
     private Vector3 target;
-    public float speed = 40;
-    private int nnn = 0;
-    private int random;
+    public float speed;
+    private int endN = 0;
+    private int random, random2;
+    private int beginN;
     void Start()
     {
-        target.Set(4, 0, 0);
-        // target = point1.position;
+       
     }
 
        void Update()
@@ -37,28 +37,48 @@ public class Moving : MonoBehaviour
     private void MoveMen()
     {
         transform.LookAt(target);
-        if (forward)
-          
-                transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
-
-        if (transform.position == target)
+        if (forward == false)
         {
-            if (nnn > 0)
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+
+            if (transform.position == target)
             {
-                nnn--;
-                target = array[nnn];
-            }            
+                if (endN > 0)
+                {
+                    endN--;
+                    target = array[endN];
+                    Debug.Log(endN);
+                }
+            }
+        }
+        if (forward == true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+
+            if (transform.position == target)
+            {
+                if (endN < beginN - 1)
+                {
+                    endN++;
+                    target = array[endN];
+                    Debug.Log(endN);
+                }
+            }
         }
     }
     private void FillArray()
     {
-        nnn = int.Parse(n.text);
-        array = new Vector3[nnn];
+        endN = int.Parse(n.text);
+        beginN = endN;
+        
+        array = new Vector3[endN];
 
-        for (int i = 0; i < nnn; ++i)
+        for (int i = 0; i < endN; ++i)
         {
-            random = UnityEngine.Random.Range(0, 5);
-            array[i] = new Vector3(random, random + 1, random - 1);
+            random = UnityEngine.Random.Range(-5, 5);
+            random2 = UnityEngine.Random.Range(-5, 5);
+            array[i] = new Vector3(random, 0, random2);
+           
         }
     }
 
