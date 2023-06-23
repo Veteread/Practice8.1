@@ -9,13 +9,13 @@ public class Race : MonoBehaviour
     public Object Men;
     public GameObject Stick;
     public GameObject MyStick;
-    public float speed = 4;
+    public float Speed = 4;
     public Transform target;
     
        private void Update()
     {
         transform.LookAt(target);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * Speed);
         if (transform.position == target.position)
         {
             Men.GetComponent<Race>().enabled = true;

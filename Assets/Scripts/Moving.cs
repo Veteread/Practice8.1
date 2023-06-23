@@ -3,19 +3,23 @@ using UnityEngine.UI;
 
 public class Moving : MonoBehaviour
 {
-    public bool forward;
-    private bool stopRand = false;
-    public InputField n;
-    private Vector3[] array;   
+    public InputField N;
+
+    private Vector3[] array;
     private Vector3 target;
-    public float speed;
+
+    public bool Forward;
+    private bool stopRand = false;
+    
+    public float Speed;
+
     private int endN = 0;
     private int random, random2;
     private int beginN;
   
        void Update()
     {
-        if (n != null && stopRand == false)
+        if (N != null && stopRand == false)
         {
             FillArray();
             stopRand = true;
@@ -26,9 +30,9 @@ public class Moving : MonoBehaviour
     private void MoveMen()
     {
         transform.LookAt(target);
-        if (forward == false)
+        if (Forward == false)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * Speed);
 
             if (transform.position == target)
             {
@@ -38,12 +42,12 @@ public class Moving : MonoBehaviour
                     target = array[endN];
                     Debug.Log(endN);
                 }
-                else forward = true;
+                else Forward = true;
             }
         }
-        if (forward == true)
+        if (Forward == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * Speed);
 
             if (transform.position == target)
             {
@@ -53,14 +57,14 @@ public class Moving : MonoBehaviour
                     target = array[endN];
                     Debug.Log(endN);
                 }
-                else forward = false;
+                else Forward = false;
             }
         }
     }
 
     private void FillArray()
     {
-        endN = int.Parse(n.text);
+        endN = int.Parse(N.text);
         beginN = endN;
         
         array = new Vector3[endN];
